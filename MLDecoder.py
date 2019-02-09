@@ -3,6 +3,7 @@ import pyldpc
 import Codes
 from time import time
 from scipy.stats import levy_stable
+np.seterr(divide = 'ignore')
 
 
 # for single word, can we find it?
@@ -12,7 +13,7 @@ def MLSinCodeWord(revcode,k,N,codeword,alpha,scale):
     for i in range(2**k):
         codei = codeword[i]
         t = time()
-        sumpdf = np.sum(levy_stable.logpdf(revcode-codei,alpha,0,0,scale))
+        sumpdf = np.sum(levy_stable.logpdf(revcode-codei+10**-10, alpha,0,0,scale))
         #print('one codeword:',time()-t)
         maxlog = max(maxlog, sumpdf)
         if(maxlog == sumpdf):
@@ -23,9 +24,10 @@ def MLSinCodeWord(revcode,k,N,codeword,alpha,scale):
 def MLDecoder(revcodes,k,N,codeword,alpha,scale):
     res = revcodes
     for i in range(2**k):
+        t = time()
         resi, _ = MLSinCodeWord(revcodes[i],k,N,codeword,alpha,scale)
         res[i] = resi
-        #print("Finish:", i, "total:", 2**k)
+        print("Finish:", i, "total:", 2**k, "time use:", time() - t)
     return res
 
 def DecMessage(Dec_Codes,tG,k):
