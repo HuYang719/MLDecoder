@@ -13,7 +13,7 @@ def MLSinCodeWord(revcode,k,N,codeword,alpha,scale):
         codei = codeword[i]
         t = time()
         sumpdf = np.sum(levy_stable.logpdf(revcode-codei,alpha,0,0,scale))
-        print('one codeword:',time()-t)
+        #print('one codeword:',time()-t)
         maxlog = max(maxlog, sumpdf)
         if(maxlog == sumpdf):
             res = codei
@@ -25,7 +25,7 @@ def MLDecoder(revcodes,k,N,codeword,alpha,scale):
     for i in range(2**k):
         resi, _ = MLSinCodeWord(revcodes[i],k,N,codeword,alpha,scale)
         res[i] = resi
-        print("Finish:", i, "total:", 2**k)
+        #print("Finish:", i, "total:", 2**k)
     return res
 
 def DecMessage(Dec_Codes,tG,k):
@@ -40,4 +40,4 @@ if __name__ == '__main__':
     revcode = [1, -1]
     codeword = [[-1,1],[1,-1]]
     codei, maxlog = MLSinCodeWord(revcode,1,2,codeword,1.8,0.6)
-    print(codei,maxlog)
+    #print(codei,maxlog)

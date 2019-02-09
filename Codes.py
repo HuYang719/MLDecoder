@@ -41,7 +41,7 @@ def encoding(k=8,N=16,H=None):
              [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]]
 
     tG = pyldpc.CodingMatrix(H)
-    print(tG)
+    #print(tG)
     return tG
 
 

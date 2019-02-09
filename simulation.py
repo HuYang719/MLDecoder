@@ -31,9 +31,10 @@ if __name__ == '__main__':
     k = 8
     N = 16
     alpha = 1.5
-    GSNRs = np.linspace(0, 9, 15)
+    GSNRs = np.linspace(0, 14, 15)
     t = time()
-    sim_nums = 1
+    sim_nums = 10
+    print("alpha={}\n".format(alpha))
     for i in range(15):
         errors = 0
         nums = 0
@@ -41,6 +42,9 @@ if __name__ == '__main__':
             error, num = simML(k, N, alpha, GSNRs[i])
             errors += error
             nums += num
+            timenow = time() - t
+            print("Finish:{}/{} in GSNR:{}\n".format(j, sim_nums, GSNRs[i]))
+            print("Use time:", timenow)
         with open('./results.txt', 'a') as f:
             f.write('GSNRS:{},errors:{},nums:{},BER:{}\n'.format(GSNRs[i], errors, nums, errors/nums))
     t = time() - t
