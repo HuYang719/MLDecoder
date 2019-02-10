@@ -38,15 +38,17 @@ if __name__ == '__main__':
     for i in range(15):
         errors = 0
         nums = 0
-        for j in range(sim_nums):
+        for j in range(4, sim_nums):
             error, num = simML(k, N, alpha, GSNRs[i])
             errors += error
             nums += num
             timenow = time() - t
             print("Finish:{}/{} in GSNR:{}\n".format(j, sim_nums, GSNRs[i]))
             print("Use time:", timenow)
+            with open('./results.txt', 'a') as f:
+                f.write('GSNRS:{},ID:{},errors:{},nums:{},BER:{}\n'.format(GSNRs[i], j, errors, nums, errors/nums))
         with open('./results.txt', 'a') as f:
-            f.write('GSNRS:{},errors:{},nums:{},BER:{}\n'.format(GSNRs[i], errors, nums, errors/nums))
+            f.write('total:GSNRS:{},errors:{},nums:{},BER:{}\n'.format(GSNRs[i], errors, nums, errors / nums))
     t = time() - t
     print(errors, nums)
     print("Use time:", t)
