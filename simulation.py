@@ -35,10 +35,10 @@ if __name__ == '__main__':
     t = time()
     sim_nums = 10
     print("alpha={}\n".format(alpha))
-    for i in range(15):
+    for i in range(0,9):
         errors = 0
         nums = 0
-        for j in range(4, sim_nums):
+        for j in range(sim_nums):
             error, num = simML(k, N, alpha, GSNRs[i])
             errors += error
             nums += num
